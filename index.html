@@ -55,10 +55,16 @@
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .cta-button:hover {
             background-color: #ff6b35;
+            transform: scale(1.05);
+        }
+
+        .cta-button:active {
+            transform: scale(0.95);
         }
 
         .features, .specs, .testimonials, .order {
@@ -132,6 +138,29 @@
             color: #00ff88;
             font-weight: bold;
         }
+
+        /* Styling the Order Now link like a button */
+        .price-box a {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #ff4500;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .price-box a:hover {
+            background-color: #ff6b35;
+            transform: scale(1.05);
+        }
+
+        .price-box a:active {
+            transform: scale(0.95);
+        }
+
     </style>
 </head>
 <body>
