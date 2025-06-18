@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haha Imagine Clicking on This!</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and Background */
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            animation: flashBackground 2s infinite alternate;
+            overflow: hidden;
+        }
+
+        /* Flashing Background */
+        @keyframes flashBackground {
+            0% { background-color: #ff0000; }
+            25% { background-color: #00ff00; }
+            50% { background-color: #0000ff; }
+            75% { background-color: #ff00ff; }
+            100% { background-color: #ffff00; }
+        }
+
+        /* Header Style with RGB Text Color */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            animation: rgbText 1.5s linear infinite;
+        }
+
+        /* RGB Text Animation */
+        @keyframes rgbText {
+            0% { color: rgb(255, 0, 0); }
+            25% { color: rgb(0, 255, 0); }
+            50% { color: rgb(0, 0, 255); }
+            75% { color: rgb(255, 255, 0); }
+            100% { color: rgb(255, 0, 255); }
+        }
+
+        /* Fun Button */
+        .cta-button {
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #ff4081, #ff80ab);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            animation: rgbButtonText 2s linear infinite alternate;
+            text-align: center; /* Fix button text alignment */
+        }
+
+        /* Different RGB animation for the button text */
+        @keyframes rgbButtonText {
+            0% { color: rgb(255, 0, 0); }
+            25% { color: rgb(0, 255, 0); }
+            50% { color: rgb(0, 0, 255); }
+            75% { color: rgb(255, 255, 0); }
+            100% { color: rgb(255, 0, 255); }
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Bonus style: explosion animation */
+        .explosion {
+            font-size: 5rem;
+            color: #ff4081;
+            position: absolute; /* Make it float above content */
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: explosion 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes explosion {
+            0% { transform: scale(1) translateX(-50%); opacity: 1; }
+            100% { transform: scale(1.5) translateX(-50%); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+   <div>
+       <h1>Haha, imagine clicking on this!</h1>
+       <button class="cta-button" onclick="showAlert()">
+           Click Me For a Surprise
+       </button>
+   </div>
+
+   <div class="explosion">💥</div>
+
+   <script>
+       function showAlert() {
+           console.log('Button clicked!'); // Check if the button click is registered
+           alert('Gotcha! 😜 Imagine thinking of buying a fictional watch 🤣🤣🤣');
+       }
+   </script>
+</body>
+</html>
