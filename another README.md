@@ -1,1 +1,0 @@
-"Please do not open this HTML file, as it contains the source code for youareanidiot.cc.. I take no responsibility for any potential harm to your device or loss of unsaved data. Credit goes to EndermanCH for creating this HTML5 project."
