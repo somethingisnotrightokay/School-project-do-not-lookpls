@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>The finger, deal with it.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      html, body {
-        margin: 0;
-        height: 100%;
-        background-color: #f9f9f9;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-      }
+<head>
+  <meta charset="UTF-8"/>
+  <title>The finger, deal with it.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    /* full-page reset & center */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
 
-      .hand {
-        width: 200px;
-        height: 200px;
-        background-image: url('https://raw.githubusercontent.com/tholman/thats-the-finger/master/img/hand.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        animation: flip 2s infinite alternate;
-        transform-origin: bottom center;
-      }
+    /* our “hand” is just a giant emoji */
+    .hand {
+      font-size: 200px;
+      animation: flip 2s infinite alternate ease-in-out;
+      transform-origin: center bottom;
+    }
 
-      @keyframes flip {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(-20deg); }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="hand"></div>
-  </body>
+    @keyframes flip {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(-20deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="hand">🖕</div>
+</body>
 </html>
