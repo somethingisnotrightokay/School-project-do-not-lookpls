@@ -3,171 +3,253 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forbidden Button</title>
+  <title>Checkout - TitanTime Pro Max</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; }
     body {
+      background: #1a1a2e;
+      color: #fff;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: 'Comic Sans MS', sans-serif;
-      animation: flashBG 2s infinite alternate;
     }
-    @keyframes flashBG {
-      0%   { background: #f00; }
-      25%  { background: #0f0; }
-      50%  { background: #00f; }
-      75%  { background: #f0f; }
-      100% { background: #ff0; }
+    .checkout-container {
+      background: #16213e;
+      border-radius: 16px;
+      box-shadow: 0 6px 32px rgba(25, 118, 210, 0.13);
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 410px;
+      width: 100%;
+      margin: 2rem;
     }
-    h1 {
+    .product-summary {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #23234b;
+      padding-bottom: 1.25rem;
+    }
+    .product-summary img {
+      width: 88px;
+      height: 88px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(255, 69, 0, 0.10);
+      background: #111;
+    }
+    .product-details {
+      flex: 1;
+    }
+    .product-title {
+      font-size: 1.18rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: #ff4500;
+      letter-spacing: 0.5px;
+    }
+    .product-desc {
+      color: #ccc;
+      font-size: 0.96rem;
+      margin-bottom: 0.15rem;
+    }
+    .product-price {
+      color: #ff4500;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    .old-price {
+      text-decoration: line-through;
+      color: #888;
+      font-size: 0.98rem;
+      margin-right: 0.35rem;
+    }
+    .savings {
+      color: #00ff88;
+      font-weight: bold;
+      font-size: 0.98rem;
+      margin-top: 0.3rem;
+    }
+    .checkout-form label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.99rem;
+      margin-bottom: 0.3rem;
+      color: #ff4500;
+      letter-spacing: 0.1px;
+    }
+    .checkout-form input {
+      width: 100%;
+      padding: 0.7rem;
+      border: 1px solid #283660;
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-bottom: 1.1rem;
+      background: #23234b;
+      color: white;
+      transition: border 0.2s;
+    }
+    .checkout-form input:focus {
+      border-color: #ff4500;
+      outline: none;
+    }
+    .checkout-btn {
+      width: 100%;
+      background: linear-gradient(90deg, #ff4500, #ff6b35);
       color: #fff;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-      animation: rainbowText 3s infinite linear;
-    }
-    @keyframes rainbowText {
-      0%   { color: #f00; }
-      16%  { color: #ff9200; }
-      33%  { color: #ff0; }
-      50%  { color: #0f0; }
-      66%  { color: #0ff; }
-      83%  { color: #00f; }
-      100% { color: #f0f; }
-    }
-    #ctaButton {
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
       border: none;
-      border-radius: 50px;
-      background: linear-gradient(45deg, #ff4081, #ff80ab);
-      color: #fff;
+      border-radius: 8px;
+      padding: 0.95rem 0;
+      font-size: 1.09rem;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-      animation: shake 0.6s infinite alternate;
-      z-index: 1;
+      box-shadow: 0 4px 16px rgba(255, 69, 0, 0.10);
+      transition: background 0.2s;
+      margin-top: 0.2rem;
     }
-    @keyframes shake {
-      from { transform: rotate(-1deg); }
-      to   { transform: rotate(1deg); }
+    .checkout-btn:hover, .checkout-btn:focus {
+      background: linear-gradient(90deg, #ff6b35, #ff4500);
     }
-    .explosion {
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 4rem;
-      animation: explode 1.5s infinite alternate ease-in-out;
+    .secure-badge {
+      color: #00ff88;
+      font-weight: 500;
+      font-size: 0.97rem;
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+      gap: 0.4rem;
+      opacity: 0.82;
+      user-select: none;
+      justify-content: center;
     }
-    @keyframes explode {
-      0%   { transform: translateX(-50%) scale(1); opacity: 1; }
-      100% { transform: translateX(-50%) scale(1.5); opacity: 0; }
+    .secure-badge svg {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 2px #00ff8866);
     }
-    #confirmModal {
+    .prank-modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.9);
-      flex-direction: column;
+      background: rgba(16,16,32,0.96);
       justify-content: center;
       align-items: center;
-      padding: 1rem;
-      z-index: 2;
+      z-index: 100;
+      flex-direction: column;
+      animation: fadeIn 0.3s;
     }
-    #confirmModal.active {
+    .prank-modal.active {
       display: flex;
     }
-    #confirmModal h2 {
-      color: #ff4081;
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+    .prank-content {
+      background: #23234b;
+      border-radius: 14px;
+      padding: 2.2rem 2.5rem 2rem 2.5rem;
+      box-shadow: 0 4px 32px #ff450033;
       text-align: center;
+      max-width: 380px;
+      animation: popIn 0.22s;
+      color: #fff;
     }
-    .modalBtn {
-      margin: 0.5rem;
-      padding: 0.75rem 2rem;
-      font-size: 1rem;
+    .prank-content h2 {
+      color: #ff4500;
+      font-size: 1.7rem;
+      margin-bottom: 0.7rem;
+    }
+    .prank-content p {
+      font-size: 1.13rem;
+      margin-bottom: 1.4rem;
+      color: #ffbfae;
+    }
+    .prank-content button {
+      background: #ff4500;
+      color: #fff;
       border: none;
-      border-radius: 25px;
+      padding: 0.7rem 1.5rem;
+      border-radius: 20px;
+      font-size: 1rem;
       cursor: pointer;
-      transition: transform 0.2s ease;
+      font-family: inherit;
+      font-weight: 600;
+      margin-top: 0.3rem;
+      transition: background 0.15s;
     }
-    #confirmYes { background: #ff4081; color: #fff; }
-    #confirmNo  { background: #555;    color: #fff; }
-    .modalBtn:hover  { transform: scale(1.1); }
-    .modalBtn:active { transform: scale(0.95); }
+    .prank-content button:hover {
+      background: #ff6b35;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes popIn {
+      from { transform: scale(0.95);}
+      to   { transform: scale(1);}
+    }
+    @media (max-width: 540px) {
+      .checkout-container, .prank-content {
+        padding: 1rem !important;
+        font-size: 1rem;
+      }
+      .product-summary img {
+        width: 60px; height: 60px;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <h1>Haha, imagine clicking this!</h1>
-  <button id="ctaButton" aria-haspopup="dialog" aria-controls="confirmModal" aria-expanded="false">Click for the Final Roast</button>
-  <div class="explosion" aria-hidden="true">💥</div>
-
-  <!-- Custom Confirmation Modal -->
-  <div id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <h2 id="modalTitle">🔥 Final Warning: This Roast Is Nuclear 🔥</h2>
-    <button id="confirmYes" class="modalBtn">Roast Me 🔥</button>
-    <button id="confirmNo"  class="modalBtn">Retreat 😅</button>
+  <main class="checkout-container" aria-labelledby="mainTitle">
+    <div class="product-summary">
+      <img src="https://raw.githubusercontent.com/somethingisnotrightokay/School-project-do-not-lookpls/main/Copilot_20250625_095715.png" alt="TitanTime Pro Max product image" onerror="this.style.display='none';">
+      <div class="product-details">
+        <div class="product-title" id="mainTitle">TITANTIME PRO MAX</div>
+        <div class="product-desc">The Ultimate Smartwatch. 30-day battery, military-grade durability, athlete-tested.</div>
+        <div>
+          <span class="old-price">$1,999</span>
+          <span class="product-price">$880</span>
+        </div>
+        <div class="savings">Save 55%</div>
+      </div>
+    </div>
+    <form class="checkout-form" autocomplete="off">
+      <label for="name">Full Name</label>
+      <input id="name" type="text" placeholder="Enter your name" required>
+      <label for="address">Address</label>
+      <input id="address" type="text" placeholder="Shipping address" required>
+      <label for="card">Card Number</label>
+      <input id="card" type="text" inputmode="numeric" maxlength="16" placeholder="1234 5678 9012 3456" required>
+      <label for="exp">Expiration (MM/YY)</label>
+      <input id="exp" type="text" inputmode="numeric" maxlength="5" placeholder="MM/YY" required>
+      <label for="cvv">CVV</label>
+      <input id="cvv" type="text" inputmode="numeric" maxlength="3" placeholder="123" required>
+      <button type="submit" class="checkout-btn">Complete Secure Checkout</button>
+      <div class="secure-badge">
+        <svg fill="none" viewBox="0 0 20 20"><path fill="#00ff88" d="M10 2l7 4v4c0 5.25-4.5 8-7 8s-7-2.75-7-8V6l7-4z"/><path stroke="#fff" stroke-width="1.2" d="M7.5 10.5l2 2 3-4"/></svg>
+        256-bit SSL Secure Payment
+      </div>
+    </form>
+  </main>
+  <div class="prank-modal" id="prankModal" role="dialog" aria-modal="true">
+    <div class="prank-content">
+      <h2>Pranked! 😎</h2>
+      <p>You really thought you were buying the TitanTime Pro Max for $880?<br>
+      <strong>No money was taken. You’ve just been pranked!</strong></p>
+      <button onclick="window.location.reload()">Back to Checkout</button>
+    </div>
   </div>
-
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cta    = document.getElementById('ctaButton');
-      const modal  = document.getElementById('confirmModal');
-      const yes    = document.getElementById('confirmYes');
-      const no     = document.getElementById('confirmNo');
-
-      // Show modal
-      cta.addEventListener('click', () => {
-        modal.classList.add('active');
-        cta.setAttribute('aria-expanded', 'true');
-        yes.focus();
-      });
-
-      // Hide modal
-      function closeModal() {
-        modal.classList.remove('active');
-        cta.setAttribute('aria-expanded', 'false');
-        cta.focus();
+    document.querySelector('.checkout-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('prankModal').classList.add('active');
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.getElementById('prankModal').classList.remove('active');
       }
-      no.addEventListener('click', closeModal);
-
-      // Proceed to roast
-      yes.addEventListener('click', () => {
-        window.location.href = 'https://somethingisnotrightokay.github.io/School-project-do-not-lookpls/imagine%20getting%20roasted%3ADDDDD.html';
-      });
-
-      // Keyboard accessibility: ESC closes, TAB traps focus
-      modal.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          e.preventDefault();
-          closeModal();
-        }
-        // Trap TAB focus inside modal
-        const focusable = [yes, no];
-        if (e.key === 'Tab') {
-          const idx = focusable.indexOf(document.activeElement);
-          if (e.shiftKey) {
-            // Shift+Tab
-            if (idx === 0) {
-              focusable[focusable.length - 1].focus();
-              e.preventDefault();
-            }
-          } else {
-            // Tab
-            if (idx === focusable.length - 1) {
-              focusable[0].focus();
-              e.preventDefault();
-            }
-          }
-        }
-      });
     });
   </script>
 </body>
