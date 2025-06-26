@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forbidden Button</title>
   <style>
-    /* —— Reset & Base —— */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow: hidden; }
     body {
@@ -23,8 +22,6 @@
       75%  { background: #f0f; }
       100% { background: #ff0; }
     }
-
-    /* —— Title —— */
     h1 {
       color: #fff;
       font-size: 2.5rem;
@@ -41,8 +38,6 @@
       83%  { color: #00f; }
       100% { color: #f0f; }
     }
-
-    /* —— CTA Button —— */
     #ctaButton {
       padding: 1rem 2rem;
       font-size: 1.2rem;
@@ -60,8 +55,6 @@
       from { transform: rotate(-1deg); }
       to   { transform: rotate(1deg); }
     }
-
-    /* —— Explosion Emoji —— */
     .explosion {
       position: absolute;
       top: 10%;
@@ -74,20 +67,20 @@
       0%   { transform: translateX(-50%) scale(1); opacity: 1; }
       100% { transform: translateX(-50%) scale(1.5); opacity: 0; }
     }
-
-    /* —— Modal Overlay —— */
     #confirmModal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
       background: rgba(0,0,0,0.9);
-      display: flex;              /* flex‐props only apply when you set display:flex via JS */
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 1rem;
       z-index: 2;
+    }
+    #confirmModal.active {
+      display: flex;
     }
     #confirmModal h2 {
       color: #ff4081;
@@ -113,12 +106,12 @@
 <body>
 
   <h1>Haha, imagine clicking this!</h1>
-  <button id="ctaButton">Click for the Final Roast</button>
-  <div class="explosion">💥</div>
+  <button id="ctaButton" aria-haspopup="dialog" aria-controls="confirmModal" aria-expanded="false">Click for the Final Roast</button>
+  <div class="explosion" aria-hidden="true">💥</div>
 
   <!-- Custom Confirmation Modal -->
-  <div id="confirmModal">
-    <h2>🔥 Final Warning: This Roast Is Nuclear 🔥</h2>
+  <div id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h2 id="modalTitle">🔥 Final Warning: This Roast Is Nuclear 🔥</h2>
     <button id="confirmYes" class="modalBtn">Roast Me 🔥</button>
     <button id="confirmNo"  class="modalBtn">Retreat 😅</button>
   </div>
@@ -130,20 +123,50 @@
       const yes    = document.getElementById('confirmYes');
       const no     = document.getElementById('confirmNo');
 
-      // Show modal on tap/click
+      // Show modal
       cta.addEventListener('click', () => {
-        modal.style.display = 'flex';
+        modal.classList.add('active');
+        cta.setAttribute('aria-expanded', 'true');
+        yes.focus();
       });
 
-      // Close modal
-      no.addEventListener('click', () => {
-        modal.style.display = 'none';
-      });
+      // Hide modal
+      function closeModal() {
+        modal.classList.remove('active');
+        cta.setAttribute('aria-expanded', 'false');
+        cta.focus();
+      }
+      no.addEventListener('click', closeModal);
 
       // Proceed to roast
       yes.addEventListener('click', () => {
-        // Colon in filename must be percent-encoded as %3A
         window.location.href = 'https://somethingisnotrightokay.github.io/School-project-do-not-lookpls/imagine%20getting%20roasted%3ADDDDD.html';
+      });
+
+      // Keyboard accessibility: ESC closes, TAB traps focus
+      modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeModal();
+        }
+        // Trap TAB focus inside modal
+        const focusable = [yes, no];
+        if (e.key === 'Tab') {
+          const idx = focusable.indexOf(document.activeElement);
+          if (e.shiftKey) {
+            // Shift+Tab
+            if (idx === 0) {
+              focusable[focusable.length - 1].focus();
+              e.preventDefault();
+            }
+          } else {
+            // Tab
+            if (idx === focusable.length - 1) {
+              focusable[0].focus();
+              e.preventDefault();
+            }
+          }
+        }
       });
     });
   </script>
