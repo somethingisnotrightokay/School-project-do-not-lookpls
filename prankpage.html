@@ -1,139 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>You Clicked the Forbidden Button</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Comic Sans MS', sans-serif;
-            background: black;
-            color: white;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            animation: backgroundFlash 2s infinite alternate;
-            overflow: hidden;
-        }
-        @keyframes backgroundFlash {
-            0% { background-color: red; }
-            25% { background-color: lime; }
-            50% { background-color: blue; }
-            75% { background-color: magenta; }
-            100% { background-color: yellow; }
-        }
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 30px;
-            animation: rainbowText 2s infinite linear;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
-        }
-        @keyframes rainbowText {
-            0% { color: red; }
-            20% { color: orange; }
-            40% { color: yellow; }
-            60% { color: green; }
-            80% { color: blue; }
-            100% { color: violet; }
-        }
-        .cta-button {
-            padding: 15px 40px;
-            background: linear-gradient(45deg, #ff4081, #ff80ab);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 0 15px 5px #ff80ab;
-            animation: shake 1s infinite alternate;
-        }
-        @keyframes shake {
-            0% { transform: rotate(-2deg); }
-            100% { transform: rotate(2deg); }
-        }
-        .explosion {
-            font-size: 5rem;
-            position: absolute;
-            top: 10%;
-            animation: boom 1.5s infinite alternate;
-        }
-        @keyframes boom {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.4); opacity: 0.2; }
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forbidden Button</title>
+  <style>
+    /* —— Reset & Base —— */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', sans-serif;
+      animation: flashBG 2s infinite alternate;
+    }
+    @keyframes flashBG {
+      0%   { background: #f00; }
+      25%  { background: #0f0; }
+      50%  { background: #00f; }
+      75%  { background: #f0f; }
+      100% { background: #ff0; }
+    }
 
-        /* Modal Styling */
-        #confirmModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        #confirmModal h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #ff4081;
-        }
-        .modal-button {
-            margin: 10px;
-            padding: 12px 28px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .yes-button {
-            background-color: #ff4081;
-            color: white;
-        }
-        .no-button {
-            background-color: #444;
-            color: white;
-        }
-        .modal-button:hover {
-            transform: scale(1.1);
-        }
-    </style>
+    /* —— Title —— */
+    h1 {
+      color: #fff;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      animation: rainbowText 3s infinite linear;
+    }
+    @keyframes rainbowText {
+      0%   { color: #f00; }
+      16%  { color: #ff9200; }
+      33%  { color: #ff0; }
+      50%  { color: #0f0; }
+      66%  { color: #0ff; }
+      83%  { color: #00f; }
+      100% { color: #f0f; }
+    }
+
+    /* —— CTA Button —— */
+    #ctaButton {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(45deg, #ff4081, #ff80ab);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+      animation: shake 0.6s infinite alternate;
+      z-index: 1;
+    }
+    @keyframes shake {
+      from { transform: rotate(-1deg); }
+      to   { transform: rotate(1deg); }
+    }
+
+    /* —— Explosion Emoji —— */
+    .explosion {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 4rem;
+      animation: explode 1.5s infinite alternate ease-in-out;
+    }
+    @keyframes explode {
+      0%   { transform: translateX(-50%) scale(1); opacity: 1; }
+      100% { transform: translateX(-50%) scale(1.5); opacity: 0; }
+    }
+
+    /* —— Modal Overlay —— */
+    #confirmModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.9);
+      display: flex;              /* flex‐props only apply when you set display:flex via JS */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      z-index: 2;
+    }
+    #confirmModal h2 {
+      color: #ff4081;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .modalBtn {
+      margin: 0.5rem;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    #confirmYes { background: #ff4081; color: #fff; }
+    #confirmNo  { background: #555;    color: #fff; }
+    .modalBtn:hover  { transform: scale(1.1); }
+    .modalBtn:active { transform: scale(0.95); }
+  </style>
 </head>
 <body>
-    <h1>Haha, imagine clicking on this!</h1>
-    <button class="cta-button" onclick="redirectToPrank()">Click Me for the Final Roast</button>
-    <div class="explosion">💥</div>
 
-    <!-- Modal -->
-    <div id="confirmModal">
-        <h2>🔥 Final Warning: This Roast Is Nuclear</h2>
-        <button class="modal-button yes-button" onclick="proceedToRoast()">Send It 🔥</button>
-        <button class="modal-button no-button" onclick="closeModal()">Retreat 😰</button>
-    </div>
+  <h1>Haha, imagine clicking this!</h1>
+  <button id="ctaButton">Click for the Final Roast</button>
+  <div class="explosion">💥</div>
 
-    <script>
-        function redirectToPrank() {
-            document.getElementById("confirmModal").style.display = "flex";
-        }
+  <!-- Custom Confirmation Modal -->
+  <div id="confirmModal">
+    <h2>🔥 Final Warning: This Roast Is Nuclear 🔥</h2>
+    <button id="confirmYes" class="modalBtn">Roast Me 🔥</button>
+    <button id="confirmNo"  class="modalBtn">Retreat 😅</button>
+  </div>
 
-        function proceedToRoast() {
-            console.log("User chose chaos.");
-            window.location.href = 'https://somethingisnotrightokay.github.io/School-project-do-not-lookpls/imagine%20getting%20roasted:DDDDD.html';
-        }
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cta    = document.getElementById('ctaButton');
+      const modal  = document.getElementById('confirmModal');
+      const yes    = document.getElementById('confirmYes');
+      const no     = document.getElementById('confirmNo');
 
-        function closeModal() {
-            document.getElementById("confirmModal").style.display = "none";
-        }
-    </script>
+      // Show modal on tap/click
+      cta.addEventListener('click', () => {
+        modal.style.display = 'flex';
+      });
+
+      // Close modal
+      no.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      // Proceed to roast
+      yes.addEventListener('click', () => {
+        // Colon in filename must be percent-encoded as %3A
+        window.location.href = 'https://somethingisnotrightokay.github.io/School-project-do-not-lookpls/imagine%20getting%20roasted%3ADDDDD.html';
+      });
+    });
+  </script>
 </body>
 </html>
