@@ -1,53 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haha Imagine Clicking on This!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>You Clicked the Forbidden Button</title>
     <style>
-        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        /* Body and Background */
         body {
             font-family: 'Comic Sans MS', sans-serif;
+            background: black;
             color: white;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            text-align: center;
-            animation: flashBackground 2s infinite alternate;
+            flex-direction: column;
+            animation: backgroundFlash 2s infinite alternate;
             overflow: hidden;
         }
-        /* Flashing Background */
-        @keyframes flashBackground {
-            0% { background-color: #ff0000; }
-            25% { background-color: #00ff00; }
-            50% { background-color: #0000ff; }
-            75% { background-color: #ff00ff; }
-            100% { background-color: #ffff00; }
+        @keyframes backgroundFlash {
+            0% { background-color: red; }
+            25% { background-color: lime; }
+            50% { background-color: blue; }
+            75% { background-color: magenta; }
+            100% { background-color: yellow; }
         }
-        /* Header Style with RGB Text Color */
         h1 {
             font-size: 3.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            animation: rgbText 1.5s linear infinite;
+            margin-bottom: 30px;
+            animation: rainbowText 2s infinite linear;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
         }
-        /* RGB Text Animation */
-        @keyframes rgbText {
-            0% { color: rgb(255, 0, 0); }
-            25% { color: rgb(0, 255, 0); }
-            50% { color: rgb(0, 0, 255); }
-            75% { color: rgb(255, 255, 0); }
-            100% { color: rgb(255, 0, 255); }
+        @keyframes rainbowText {
+            0% { color: red; }
+            20% { color: orange; }
+            40% { color: yellow; }
+            60% { color: green; }
+            80% { color: blue; }
+            100% { color: violet; }
         }
-        /* Fun Button */
         .cta-button {
             padding: 15px 40px;
             background: linear-gradient(45deg, #ff4081, #ff80ab);
@@ -56,58 +51,89 @@
             border-radius: 50px;
             font-size: 1.2rem;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-            animation: rgbButtonText 2s linear infinite alternate;
-            text-align: center; /* Fix button text alignment */
+            box-shadow: 0 0 15px 5px #ff80ab;
+            animation: shake 1s infinite alternate;
         }
-        /* Different RGB animation for the button text */
-        @keyframes rgbButtonText {
-            0% { color: rgb(255, 0, 0); }
-            25% { color: rgb(0, 255, 0); }
-            50% { color: rgb(0, 0, 255); }
-            75% { color: rgb(255, 255, 0); }
-            100% { color: rgb(255, 0, 255); }
+        @keyframes shake {
+            0% { transform: rotate(-2deg); }
+            100% { transform: rotate(2deg); }
         }
-        .cta-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-        }
-        .cta-button:active {
-            transform: scale(0.95);
-        }
-        /* Bonus style: explosion animation */
         .explosion {
             font-size: 5rem;
-            color: #ff4081;
-            position: absolute; /* Make it float above content */
+            position: absolute;
             top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: explosion 1.5s ease-in-out infinite alternate;
+            animation: boom 1.5s infinite alternate;
         }
-        @keyframes explosion {
-            0% { transform: scale(1) translateX(-50%); opacity: 1; }
-            100% { transform: scale(1.5) translateX(-50%); opacity: 0; }
+        @keyframes boom {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.4); opacity: 0.2; }
+        }
+
+        /* Modal Styling */
+        #confirmModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #confirmModal h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ff4081;
+        }
+        .modal-button {
+            margin: 10px;
+            padding: 12px 28px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .yes-button {
+            background-color: #ff4081;
+            color: white;
+        }
+        .no-button {
+            background-color: #444;
+            color: white;
+        }
+        .modal-button:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-   <div>
-       <h1>Haha, imagine clicking on this!</h1>
-       <button class="cta-button" onclick="redirectToPrank()">
-           Click Me For a Surprise!(A real one)
-       </button>
-   </div>
-   <div class="explosion">💥</div>
-   <script>
-       function redirectToPrank() {
-           console.log('Button clicked! Redirecting to prank site...');
-           // Redirect to this
-           window.location.href = 'https://somethingisnotrightokay.github.io/School-project-do-not-lookpls/imagine%20getting%20roasted:DDDDD.html
-Copy path
-';
-       }
-   </script>
+    <h1>Haha, imagine clicking on this!</h1>
+    <button class="cta-button" onclick="redirectToPrank()">Click Me for the Final Roast</button>
+    <div class="explosion">💥</div>
+
+    <!-- Modal -->
+    <div id="confirmModal">
+        <h2>🔥 Final Warning: This Roast Is Nuclear</h2>
+        <button class="modal-button yes-button" onclick="proceedToRoast()">Send It 🔥</button>
+        <button class="modal-button no-button" onclick="closeModal()">Retreat 😰</button>
+    </div>
+
+    <script>
+        function redirectToPrank() {
+            document.getElementById("confirmModal").style.display = "flex";
+        }
+
+        function proceedToRoast() {
+            console.log("User chose chaos.");
+            window.location.href = 'https://somethingisnotrightokay.github.io/School-project-do-not-lookpls/imagine%20getting%20roasted:DDDDD.html';
+        }
+
+        function closeModal() {
+            document.getElementById("confirmModal").style.display = "none";
+        }
+    </script>
 </body>
 </html>
