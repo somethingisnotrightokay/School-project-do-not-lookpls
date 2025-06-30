@@ -6,197 +6,259 @@
   <title>Checkout - TitanTime Pro Max</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
   <style>
-    body {
-      background: #1a1a2e;
-      color: #fff;
-      font-family: 'Montserrat', Arial, sans-serif;
+    :root {
+      --primary: #ff4500;
+      --primary-dark: #e13d00;
+      --accent: #00ff88;
+      --bg: #161927;
+      --card-bg: rgba(34, 36, 56, 0.97);
+      --input-bg: #23234b;
+      --border: #2d3651;
+      --modal-bg: rgba(16,16,32,0.98);
+      --shadow: 0 6px 32px rgba(25, 118, 210, 0.13);
+    }
+    html, body {
+      height: 100%;
       margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1a1a2e 0%, #233a5c 100%);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #fff;
       min-height: 100vh;
+    }
+    body {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
     .checkout-container {
-      background: #16213e;
-      border-radius: 16px;
-      box-shadow: 0 6px 32px rgba(25, 118, 210, 0.13);
-      padding: 2.5rem 2rem 2rem 2rem;
-      max-width: 410px;
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 2.7rem 2.1rem 2rem 2.1rem;
+      max-width: 420px;
       width: 100%;
       margin: 2rem;
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255,255,255,0.06);
+      animation: fadeIn 0.3s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.97);}
+      to { opacity: 1; transform: scale(1);}
     }
     .product-summary {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 1.4rem;
       margin-bottom: 2rem;
-      border-bottom: 1px solid #23234b;
-      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.3rem;
     }
     .product-summary img {
-      width: 88px;
-      height: 88px;
+      width: 84px;
+      height: 84px;
       border-radius: 12px;
       object-fit: cover;
       box-shadow: 0 2px 8px rgba(255, 69, 0, 0.10);
       background: #111;
+      border: 2px solid #23234b;
     }
     .product-details {
       flex: 1;
+      min-width: 0;
     }
     .product-title {
-      font-size: 1.18rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-      color: #ff4500;
-      letter-spacing: 0.5px;
+      font-size: 1.22rem;
+      font-weight: 700;
+      margin-bottom: 0.22rem;
+      color: var(--primary);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 5px #1112;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .product-desc {
-      color: #ccc;
-      font-size: 0.96rem;
-      margin-bottom: 0.15rem;
+      color: #e0e0e6;
+      font-size: 0.97rem;
+      margin-bottom: 0.18rem;
+      font-weight: 500;
+      line-height: 1.34;
+      letter-spacing: 0.07em;
     }
     .product-price {
-      color: #ff4500;
-      font-size: 1.1rem;
+      color: var(--primary);
+      font-size: 1.15rem;
       font-weight: bold;
+      letter-spacing: 0.03em;
+      vertical-align: middle;
     }
     .old-price {
       text-decoration: line-through;
-      color: #888;
-      font-size: 0.98rem;
-      margin-right: 0.35rem;
+      color: #9c9c9c;
+      font-size: 1.01rem;
+      margin-right: 0.4rem;
+      opacity: 0.75;
+      vertical-align: middle;
     }
     .savings {
-      color: #00ff88;
+      color: var(--accent);
       font-weight: bold;
-      font-size: 0.98rem;
-      margin-top: 0.3rem;
+      font-size: 0.99rem;
+      margin-top: 0.4rem;
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 4px #00ff8822;
     }
     .checkout-form label {
       display: block;
-      font-weight: 600;
-      font-size: 0.99rem;
-      margin-bottom: 0.3rem;
-      color: #ff4500;
+      font-weight: 700;
+      font-size: 1.01rem;
+      margin-bottom: 0.32rem;
+      color: var(--primary);
       letter-spacing: 0.1px;
+      margin-top: 0.22rem;
     }
     .checkout-form input {
       width: 100%;
-      padding: 0.7rem;
-      border: 1px solid #283660;
-      border-radius: 6px;
-      font-size: 1rem;
-      margin-bottom: 1.1rem;
-      background: #23234b;
-      color: white;
-      transition: border 0.2s;
+      padding: 0.72rem 0.95rem;
+      border: 1.6px solid var(--border);
+      border-radius: 7px;
+      font-size: 1.03rem;
+      margin-bottom: 1.05rem;
+      background: var(--input-bg);
+      color: #fff;
+      transition: border 0.19s, background 0.18s;
+      font-family: inherit;
+      font-weight: 500;
+      box-sizing: border-box;
     }
     .checkout-form input:focus {
-      border-color: #ff4500;
+      border-color: var(--primary);
+      background: #252555;
       outline: none;
+      box-shadow: 0 0 0 2px #ff450033;
     }
     .checkout-btn {
       width: 100%;
-      background: linear-gradient(90deg, #ff4500, #ff6b35);
+      background: linear-gradient(90deg, var(--primary), #ff6b35 90%);
       color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 0.95rem 0;
-      font-size: 1.09rem;
-      font-weight: 600;
+      padding: 1.05rem 0;
+      font-size: 1.13rem;
+      font-weight: 700;
       cursor: pointer;
       box-shadow: 0 4px 16px rgba(255, 69, 0, 0.10);
-      transition: background 0.2s;
+      transition: background 0.21s, transform 0.15s;
       margin-top: 0.2rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
     .checkout-btn:hover, .checkout-btn:focus {
-      background: linear-gradient(90deg, #ff6b35, #ff4500);
+      background: linear-gradient(90deg, #ff6b35, var(--primary-dark) 90%);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 32px 0 #ff450020;
     }
     .secure-badge {
-      color: #00ff88;
-      font-weight: 500;
-      font-size: 0.97rem;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1.02rem;
       display: flex;
       align-items: center;
-      margin-top: 1rem;
-      gap: 0.4rem;
-      opacity: 0.82;
+      margin-top: 1.05rem;
+      gap: 0.5rem;
+      opacity: 0.86;
       user-select: none;
       justify-content: center;
+      letter-spacing: 0.04em;
     }
     .secure-badge svg {
-      width: 19px;
-      height: 19px;
+      width: 21px;
+      height: 21px;
       flex-shrink: 0;
       filter: drop-shadow(0 0 2px #00ff8866);
     }
-    .prank-modal {
+
+    .prank-modal,
+    .warning-modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background: rgba(16,16,32,0.96);
+      background: var(--modal-bg);
       justify-content: center;
       align-items: center;
       z-index: 100;
       flex-direction: column;
-      animation: fadeIn 0.3s;
+      animation: fadeIn 0.28s;
     }
-    .prank-modal.active {
+    .prank-modal.active,
+    .warning-modal.active {
       display: flex;
     }
-    .prank-content {
-      background: #23234b;
-      border-radius: 14px;
+    .prank-content, .warning-content {
+      background: var(--card-bg);
+      border-radius: 16px;
       padding: 2.2rem 2.5rem 2rem 2.5rem;
       box-shadow: 0 4px 32px #ff450033;
       text-align: center;
       max-width: 380px;
-      animation: popIn 0.22s;
+      animation: popIn 0.21s;
       color: #fff;
+      border: 1.6px solid #2d3651bb;
     }
-    .prank-content h2 {
-      color: #ff4500;
+    .prank-content h2, .warning-content h2 {
+      color: var(--primary);
       font-size: 1.7rem;
       margin-bottom: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-shadow: 0 2px 8px #0004;
     }
-    .prank-content p {
-      font-size: 1.13rem;
+    .prank-content p, .warning-content p {
+      font-size: 1.17rem;
       margin-bottom: 1.4rem;
       color: #ffbfae;
+      font-weight: 600;
+      letter-spacing: 0.03em;
     }
-    .prank-content button {
-      background: #ff4500;
+    .prank-content button, .warning-content button {
+      background: var(--primary);
       color: #fff;
       border: none;
-      padding: 0.7rem 1.5rem;
-      border-radius: 20px;
-      font-size: 1rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 22px;
+      font-size: 1.08rem;
       cursor: pointer;
       font-family: inherit;
-      font-weight: 600;
-      margin-top: 0.3rem;
-      transition: background 0.15s;
+      font-weight: 700;
+      margin: 0.4rem 0.6rem 0 0.6rem;
+      transition: background 0.16s;
+      box-shadow: 0 2px 12px #ff450044;
+      letter-spacing: 0.03em;
+      min-width: 90px;
     }
-    .prank-content button:hover {
-      background: #ff6b35;
+    .prank-content button:hover, .warning-content button:hover {
+      background: var(--primary-dark);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    @keyframes popIn {
-      from { transform: scale(0.95);}
-      to   { transform: scale(1);}
-    }
-    @media (max-width: 540px) {
-      .checkout-container, .prank-content {
-        padding: 1rem !important;
+    @media (max-width: 560px) {
+      .checkout-container, .prank-content, .warning-content {
+        padding: 1.1rem !important;
         font-size: 1rem;
       }
       .product-summary img {
-        width: 60px; height: 60px;
+        width: 54px; height: 54px;
+      }
+      .product-title {
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 410px) {
+      .checkout-container, .prank-content, .warning-content {
+        padding: 0.5rem !important;
       }
     }
   </style>
@@ -217,16 +279,19 @@
     </div>
     <form class="checkout-form" autocomplete="off">
       <label for="name">Full Name</label>
-      <input id="name" type="text" placeholder="Enter your name" required>
+      <input id="name" type="text" placeholder="Enter your name" required autocomplete="name">
       <label for="address">Address</label>
-      <input id="address" type="text" placeholder="Shipping address" required>
+      <input id="address" type="text" placeholder="Shipping address" required autocomplete="address-line1">
       <label for="card">Card Number</label>
-      <input id="card" type="text" inputmode="numeric" maxlength="16" placeholder="1234 5678 9012 3456" required>
+      <input id="card" type="text" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456" required autocomplete="cc-number">
       <label for="exp">Expiration (MM/YY)</label>
-      <input id="exp" type="text" inputmode="numeric" maxlength="5" placeholder="MM/YY" required>
+      <input id="exp" type="text" inputmode="numeric" maxlength="5" placeholder="MM/YY" required autocomplete="cc-exp">
       <label for="cvv">CVV</label>
-      <input id="cvv" type="text" inputmode="numeric" maxlength="3" placeholder="123" required>
-      <button type="submit" class="checkout-btn">Complete Secure Checkout</button>
+      <input id="cvv" type="text" inputmode="numeric" maxlength="4" placeholder="123" required autocomplete="cc-csc">
+      <button type="submit" class="checkout-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:0.6em;" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10.5L8.5 15L16 7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        Complete Secure Checkout
+      </button>
       <div class="secure-badge">
         <svg fill="none" viewBox="0 0 20 20"><path fill="#00ff88" d="M10 2l7 4v4c0 5.25-4.5 8-7 8s-7-2.75-7-8V6l7-4z"/><path stroke="#fff" stroke-width="1.2" d="M7.5 10.5l2 2 3-4"/></svg>
         256-bit SSL Secure Payment
@@ -236,19 +301,103 @@
   <div class="prank-modal" id="prankModal" role="dialog" aria-modal="true">
     <div class="prank-content">
       <h2>Pranked! 😎</h2>
-      <p>You really thought you were buying the TitanTime Pro Max for $880? No money was taken.(99% Guarantee given)<br>
-      <strong>You’ve just been pranked!</strong></p>
-      <button onclick="window.location.reload()">Back to Checkout</button>
+      <p>
+        You really thought you were buying the <strong>TitanTime Pro Max</strong> for $880?<br>
+        <span style="color: #00ff88;">No money was taken (99% Guarantee given)</span><br>
+        <strong>You’ve just been pranked!</strong>
+      </p>
+      <button id="backToCheckoutBtn" type="button">Back to Checkout</button>
+    </div>
+  </div>
+  <div class="warning-modal" id="warningModal" role="alertdialog" aria-modal="true" aria-labelledby="warningTitle">
+    <div class="warning-content">
+      <h2 id="warningTitle">Warning</h2>
+      <p>Are you sure? You will see something offensive.</p>
+      <div>
+        <button id="warningYesBtn" type="button">Yes</button>
+        <button id="warningNoBtn" type="button">No</button>
+      </div>
     </div>
   </div>
   <script>
+    // Modal logic
     document.querySelector('.checkout-form').addEventListener('submit', function(e) {
       e.preventDefault();
       document.getElementById('prankModal').classList.add('active');
+      setTimeout(() => {
+        document.getElementById('backToCheckoutBtn').focus();
+      }, 100);
     });
+
+    // Card formatting
+    document.getElementById('card').addEventListener('input', function() {
+      let v = this.value.replace(/\D/g,'').replace(/(.{4})/g,'$1 ').trim();
+      this.value = v.slice(0, 19);
+    });
+    // Expiry formatting
+    document.getElementById('exp').addEventListener('input', function() {
+      let v = this.value.replace(/[^\d]/g,'');
+      if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2,4);
+      this.value = v.slice(0,5);
+    });
+    // Only allow numbers for CVV
+    document.getElementById('cvv').addEventListener('input', function() {
+      this.value = this.value.replace(/\D/g,'').slice(0,4);
+    });
+
+    // Warning modal and redirect logic
+    let backClickCount = 0;
+    let warningYesCount = 0;
+    const prankModal = document.getElementById('prankModal');
+    const warningModal = document.getElementById('warningModal');
+    const backBtn = document.getElementById('backToCheckoutBtn');
+    const warningYesBtn = document.getElementById('warningYesBtn');
+    const warningNoBtn = document.getElementById('warningNoBtn');
+    const redirectURL = "https://somethingisnotrightokay.github.io/School-project-do-not-lookpls/middlefingerwebsite.html";
+
+    backBtn.addEventListener('click', function() {
+      backClickCount++;
+      if (backClickCount <= 5) {
+        // Just close and reopen modal for effect
+        prankModal.classList.remove('active');
+        setTimeout(() => prankModal.classList.add('active'), 200);
+      } else {
+        // Show warning modal from 6th click
+        prankModal.classList.remove('active');
+        warningModal.classList.add('active');
+        warningYesBtn.focus();
+      }
+    });
+
+    warningYesBtn.addEventListener('click', function() {
+      warningYesCount++;
+      if (warningYesCount >= 2) {
+        // Actually redirect
+        window.location.href = redirectURL;
+      } else {
+        // Ask again
+        warningModal.classList.remove('active');
+        setTimeout(() => warningModal.classList.add('active'), 200);
+        warningYesBtn.focus();
+      }
+    });
+
+    warningNoBtn.addEventListener('click', function() {
+      warningModal.classList.remove('active');
+      prankModal.classList.add('active');
+      backBtn.focus();
+    });
+
+    // Dismiss modals with ESC
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        document.getElementById('prankModal').classList.remove('active');
+        if (warningModal.classList.contains('active')) {
+          warningModal.classList.remove('active');
+          prankModal.classList.add('active');
+          backBtn.focus();
+        } else if (prankModal.classList.contains('active')) {
+          prankModal.classList.remove('active');
+        }
       }
     });
   </script>
