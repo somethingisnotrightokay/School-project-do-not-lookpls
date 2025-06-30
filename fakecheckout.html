@@ -1,394 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout - TitanTime Pro Max</title>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TitanTime Pro Max Checkout</title>
   <style>
-    :root {
-      --primary: #ff4500;
-      --primary-dark: #e13d00;
-      --accent: #00ff88;
-      --bg: #161927;
-      --card-bg: rgba(34, 36, 56, 0.97);
-      --input-bg: #23234b;
-      --border: #2d3651;
-      --modal-bg: rgba(16,16,32,0.98);
-      --shadow: 0 6px 32px rgba(25, 118, 210, 0.13);
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #1a1a2e 0%, #233a5c 100%);
-      font-family: 'Montserrat', Arial, sans-serif;
-      color: #fff;
-      min-height: 100vh;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-family: Arial, sans-serif;
+      background: #1a1a2e;
+      color: white;
       min-height: 100vh;
     }
-    .checkout-container {
-      background: var(--card-bg);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 2.7rem 2.1rem 2rem 2.1rem;
-      max-width: 420px;
-      width: 100%;
-      margin: 2rem;
-      backdrop-filter: blur(2px);
-      border: 1px solid rgba(255,255,255,0.06);
-      animation: fadeIn 0.3s;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.97);}
-      to { opacity: 1; transform: scale(1);}
-    }
-    .product-summary {
-      display: flex;
-      align-items: center;
-      gap: 1.4rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1.3rem;
-    }
-    .product-summary img {
-      width: 84px;
-      height: 84px;
-      border-radius: 12px;
-      object-fit: cover;
-      box-shadow: 0 2px 8px rgba(255, 69, 0, 0.10);
-      background: #111;
-      border: 2px solid #23234b;
-    }
-    .product-details {
-      flex: 1;
-      min-width: 0;
+    .container {
+      max-width: 450px;
+      margin: 40px auto;
+      background: #16213e;
+      border-radius: 10px;
+      box-shadow: 0 4px 32px #0005;
+      padding: 36px 26px 28px;
     }
     .product-title {
-      font-size: 1.22rem;
-      font-weight: 700;
-      margin-bottom: 0.22rem;
-      color: var(--primary);
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      text-shadow: 0 1px 5px #1112;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 2.1rem;
+      font-weight: bold;
+      text-align: center;
+      color: #ff4500;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
     }
     .product-desc {
-      color: #e0e0e6;
-      font-size: 0.97rem;
-      margin-bottom: 0.18rem;
-      font-weight: 500;
-      line-height: 1.34;
-      letter-spacing: 0.07em;
+      color: #ccc;
+      margin-bottom: 18px;
+      text-align: center;
+      font-size: 1.1rem;
     }
-    .product-price {
-      color: var(--primary);
-      font-size: 1.15rem;
+    .price {
+      font-size: 1.5rem;
+      color: #ff4500;
       font-weight: bold;
-      letter-spacing: 0.03em;
-      vertical-align: middle;
-    }
-    .old-price {
-      text-decoration: line-through;
-      color: #9c9c9c;
-      font-size: 1.01rem;
-      margin-right: 0.4rem;
-      opacity: 0.75;
-      vertical-align: middle;
+      text-align: center;
+      margin-bottom: 4px;
     }
     .savings {
-      color: var(--accent);
+      color: #00ff88;
+      text-align: center;
+      margin-bottom: 10px;
       font-weight: bold;
-      font-size: 0.99rem;
-      margin-top: 0.4rem;
-      letter-spacing: 0.04em;
-      text-shadow: 0 0 4px #00ff8822;
     }
-    .checkout-form label {
+    .checkout-form {
+      margin-top: 28px;
+    }
+    label {
       display: block;
-      font-weight: 700;
-      font-size: 1.01rem;
-      margin-bottom: 0.32rem;
-      color: var(--primary);
-      letter-spacing: 0.1px;
-      margin-top: 0.22rem;
-    }
-    .checkout-form input {
-      width: 100%;
-      padding: 0.72rem 0.95rem;
-      border: 1.6px solid var(--border);
-      border-radius: 7px;
-      font-size: 1.03rem;
-      margin-bottom: 1.05rem;
-      background: var(--input-bg);
-      color: #fff;
-      transition: border 0.19s, background 0.18s;
-      font-family: inherit;
+      margin: 14px 0 6px;
       font-weight: 500;
-      box-sizing: border-box;
+      color: #ff4500;
+      font-size: 1.02rem;
     }
-    .checkout-form input:focus {
-      border-color: var(--primary);
-      background: #252555;
-      outline: none;
-      box-shadow: 0 0 0 2px #ff450033;
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 5px;
+      background: #23234a;
+      color: white;
+      font-size: 1rem;
     }
     .checkout-btn {
+      margin-top: 22px;
       width: 100%;
-      background: linear-gradient(90deg, var(--primary), #ff6b35 90%);
+      padding: 14px;
+      background: #ff4500;
       color: #fff;
       border: none;
-      border-radius: 8px;
-      padding: 1.05rem 0;
-      font-size: 1.13rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(255, 69, 0, 0.10);
-      transition: background 0.21s, transform 0.15s;
-      margin-top: 0.2rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .checkout-btn:hover, .checkout-btn:focus {
-      background: linear-gradient(90deg, #ff6b35, var(--primary-dark) 90%);
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 8px 32px 0 #ff450020;
-    }
-    .secure-badge {
-      color: var(--accent);
+      border-radius: 6px;
+      font-size: 1.1rem;
       font-weight: 600;
-      font-size: 1.02rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
       display: flex;
       align-items: center;
-      margin-top: 1.05rem;
-      gap: 0.5rem;
-      opacity: 0.86;
-      user-select: none;
       justify-content: center;
-      letter-spacing: 0.04em;
+      gap: 9px;
     }
-    .secure-badge svg {
-      width: 21px;
-      height: 21px;
-      flex-shrink: 0;
-      filter: drop-shadow(0 0 2px #00ff8866);
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: var(--modal-bg);
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
-      flex-direction: column;
-      animation: fadeIn 0.28s;
-    }
-    .modal.active {
-      display: flex;
-    }
-    .modal-content {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 2.2rem 2.5rem 2rem 2.5rem;
-      box-shadow: 0 4px 32px #ff450033;
+    .checkout-btn:hover { background: #ff6b35; transform: scale(1.03);}
+    .checkout-btn:active { transform: scale(0.97);}
+    .secure {
+      margin: 20px 0 0;
+      color: #aaa;
       text-align: center;
+      font-size: 0.98rem;
+    }
+    .modal-bg {
+      display: none; position: fixed; z-index: 1000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: #000a; align-items: center; justify-content: center;
+    }
+    .modal-bg.active { display: flex; }
+    .modal {
+      background: #16213e;
       max-width: 380px;
-      animation: popIn 0.21s;
+      padding: 32px 20px;
+      border-radius: 10px;
+      box-shadow: 0 6px 32px #0006;
+      text-align: center;
       color: #fff;
-      border: 1.6px solid #2d3651bb;
+      border: 2px solid #ff4500;
     }
-    .modal-content h2 {
-      color: var(--primary);
-      font-size: 1.7rem;
-      margin-bottom: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-shadow: 0 2px 8px #0004;
-    }
-    .modal-content p {
-      font-size: 1.17rem;
-      margin-bottom: 1.4rem;
-      color: #ffbfae;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-    }
-    .modal-content button {
-      background: var(--primary);
+    .modal h2 { margin-top: 0; color: #ff4500;}
+    .modal p { color: #ccc; }
+    .modal .joke-area { margin-top: 22px; color: #00ff88; font-style: italic; font-size:1.04rem;}
+    .modal button {
+      margin-top: 22px; padding: 11px 26px;
+      background: #ff4500;
       color: #fff;
       border: none;
-      padding: 0.8rem 1.6rem;
-      border-radius: 22px;
-      font-size: 1.08rem;
+      border-radius: 5px;
+      font-size: 1.01rem;
       cursor: pointer;
-      font-family: inherit;
-      font-weight: 700;
-      margin: 0.4rem 0.6rem 0 0.6rem;
-      transition: background 0.16s;
-      box-shadow: 0 2px 12px #ff450044;
-      letter-spacing: 0.03em;
-      min-width: 90px;
+      font-weight: bold;
     }
-    .modal-content button:hover {
-      background: var(--primary-dark);
-    }
-    @media (max-width: 560px) {
-      .checkout-container, .modal-content {
-        padding: 1.1rem !important;
-        font-size: 1rem;
-      }
-      .product-summary img {
-        width: 54px; height: 54px;
-      }
-      .product-title {
-        font-size: 1rem;
-      }
-    }
-    @media (max-width: 410px) {
-      .checkout-container, .modal-content {
-        padding: 0.5rem !important;
-      }
+    .modal button:hover { background: #ff6b35;}
+    @media (max-width: 520px) {
+      .container { padding: 16px 2vw; }
+      .modal { padding: 22px 2vw; }
     }
   </style>
 </head>
 <body>
-  <main class="checkout-container" aria-labelledby="mainTitle">
-    <div class="product-summary">
-      <img src="image.png" alt="TitanTime Pro Max product image" onerror="this.style.display='none';">
-      <div class="product-details">
-        <div class="product-title" id="mainTitle">TITANTIME PRO MAX</div>
-        <div class="product-desc">The Ultimate Smartwatch. 30-day battery, military-grade durability, athlete-tested.</div>
-        <div>
-          <span class="old-price">$1,999</span>
-          <span class="product-price">$880</span>
-        </div>
-        <div class="savings">Save 55%</div>
-      </div>
+  <div class="container">
+    <div class="product-title">TitanTime Pro Max</div>
+    <div class="product-desc">
+      <strong>The Ultimate Smartwatch – Endorsed by Legends!</strong><br>
+      <span style="font-size:0.97rem;">
+        Featuring 720-hour battery, GPS that works even when you’re lost, and durability that scares hammers.<br>
+        <em>Medical-grade, military-tough, and so smart it might just take your job.</em>
+      </span>
     </div>
+    <div class="price">$880 <span style="font-size:1rem;color:#ccc;font-weight:normal;">(was <s>$1,999</s>)</span></div>
+    <div class="savings">Save 55% – Just like Bear Grylls did, allegedly!</div>
     <form class="checkout-form" autocomplete="off">
-      <label for="name">Full Name</label>
-      <input id="name" type="text" placeholder="Enter your full name" required autocomplete="name">
-      <label for="address">Address</label>
-      <input id="address" type="text" placeholder="Shipping address" required autocomplete="address-line1">
-      <label for="card">Card Number</label>
-      <input id="card" type="text" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456" required autocomplete="cc-number">
-      <label for="exp">Expiration (MM/YY)</label>
-      <input id="exp" type="text" inputmode="numeric" maxlength="5" placeholder="MM/YY" required autocomplete="cc-exp">
-      <label for="cvv">CVV</label>
-      <input id="cvv" type="text" inputmode="numeric" maxlength="4" placeholder="123" required autocomplete="cc-csc">
-      <button type="submit" class="checkout-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:0.6em;" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10.5L8.5 15L16 7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Complete Secure Checkout
+      <label for="name">Full Name (or your superhero alias… we won’t judge)</label>
+      <input type="text" id="name" name="name" placeholder="E.g. Lara Croft, T800, You">
+      <label for="address">Shipping Address (Treehouses & Space Stations accepted)</label>
+      <input type="text" id="address" name="address" placeholder="1234 Adventure Lane">
+      <label for="email">Email (for secret TitanTime tips and, um, ‘order updates’)</label>
+      <input type="email" id="email" name="email" placeholder="legend@nowhere.com">
+      <label for="card">Card Number (Don’t worry, it’s just for laughs!)</label>
+      <input type="text" id="card" name="card" maxlength="19" placeholder="0000 1234 5678 9000">
+      <label for="exp">Expiration (MM/YY) (like your excuses)</label>
+      <input type="text" id="exp" name="exp" maxlength="5" placeholder="12/99">
+      <label for="cvv">CVV (stands for: Can Verify Valor)</label>
+      <input type="text" id="cvv" name="cvv" maxlength="4" placeholder="007">
+      <button type="button" class="checkout-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M2 7v10c0 1.104.896 2 2 2h16c1.104 0 2-.896 2-2V7c0-1.104-.896-2-2-2H4c-1.104 0-2 .896-2 2zm18 0v2H4V7h16zM4 17v-4h16v4H4z"/></svg>
+        Complete Legendary Checkout
       </button>
-      <div class="secure-badge">
-        <svg fill="none" viewBox="0 0 20 20"><path fill="#00ff88" d="M10 2l7 4v4c0 5.25-4.5 8-7 8s-7-2.75-7-8V6l7-4z"/><path stroke="#fff" stroke-width="1.2" d="M7.5 10.5l2 2 3-4"/></svg>
-        256-bit SSL Secure Payment
-      </div>
     </form>
-  </main>
-  <!-- Confirmation Modal -->
-  <div class="modal" id="confirmationModal" role="dialog" aria-modal="true">
-    <div class="modal-content">
-      <h2>YourBrain.exe has stopped responding.</h2>
-      <p>
-        Imagine thinking you can buy a watch that does not exist 🤣🤣🤣<strong>Especially such a beastly watch for 880 bucks?</strong>.<br>
-        <span style="color: #00ff88;">You have a 99% guarantee that no money was taken! Or was it?</span><br>
-        Click below to return to the checkout or to view more information.
-      </p>
-      <button id="backToCheckoutBtn" type="button">Return to Checkout</button>
-      <button id="moreInfoBtn" type="button">View More Information</button>
+    <div class="secure">
+      512-bit SSL (Superb Silly Laughs) Secure Payment.<br>
+      <span style="color:#00ff88;">“So safe, even Arnold can’t break in.”</span>
     </div>
   </div>
-  <!-- Secondary Confirmation Modal -->
-  <div class="modal" id="secondaryModal" role="alertdialog" aria-modal="true" aria-labelledby="secondaryTitle">
-    <div class="modal-content">
-      <h2 id="secondaryTitle">Confirm Navigation</h2>
-      <p>Are you sure you want to proceed? The next page may contain content.</p>
-      <div>
-        <button id="confirmYesBtn" type="button">Proceed</button>
-        <button id="confirmNoBtn" type="button">Cancel</button>
-      </div>
+  <div class="modal-bg" id="confirmationModal">
+    <div class="modal">
+      <h2>Success! (Probably)</h2>
+      <p>
+        <strong>Your order for the TitanTime Pro Max is confirmed*</strong><br>
+        <span style="font-size:.98rem;">
+          *Disclaimer: “Confirmed” means “you believed this page was real.”<br>
+          Your payment is safely stored in the Land of Make-Believe.<br>
+          <span style="color:#ff4500">Fun fact:</span> The TitanTime Pro Max is so advanced, it ships itself before you order.
+        </span>
+      </p>
+      <div class="joke-area" id="randomJoke"></div>
+      <button id="visitClownfaceBtn">Visit A Website Characterizing: You</button>
     </div>
   </div>
   <script>
-    // Modal logic
-    document.querySelector('.checkout-form').addEventListener('submit', function(e) {
-      e.preventDefault();
+    // Legendary, product-themed jokes
+    const jokes = [
+      "TitanTime Pro Max: The only watch endorsed by both Chuck Norris and Father Time.",
+      "Our GPS is so accurate, it once found Waldo, Carmen Sandiego, and your motivation.",
+      "Battery lasts 720 hours… or until you try to use the flashlight.",
+      "Military-tough? We dropped it off Everest. The mountain cracked.",
+      "With solar charging, your wrist might get a tan.",
+      "Medical-grade sensors: detects your heartbeat, your steps, and your urge to procrastinate.",
+      "Waterproof up to 1km. If you go deeper, send us a postcard.",
+      "Bear Grylls tried to break it. The watch ate his lunch instead.",
+      "Endorsed by athletes, admired by astronauts, and feared by alarm clocks.",
+      "TitanTime’s alarm will wake you, your neighbors, and possibly the International Space Station."
+    ];
+    document.querySelector('.checkout-btn').addEventListener('click', function(e) {
+      // Instantly show modal and a random joke
+      const joke = jokes[Math.floor(Math.random() * jokes.length)];
+      document.getElementById('randomJoke').textContent = joke;
       document.getElementById('confirmationModal').classList.add('active');
       setTimeout(() => {
-        document.getElementById('backToCheckoutBtn').focus();
-      }, 100);
+        document.getElementById('visitClownfaceBtn').focus();
+      }, 120);
     });
-
-    // Card formatting
-    document.getElementById('card').addEventListener('input', function() {
-      let v = this.value.replace(/\D/g,'').replace(/(.{4})/g,'$1 ').trim();
-      this.value = v.slice(0, 19);
-    });
-    // Expiry formatting
-    document.getElementById('exp').addEventListener('input', function() {
-      let v = this.value.replace(/[^\d]/g,'');
-      if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2,4);
-      this.value = v.slice(0,5);
-    });
-    // Only allow numbers for CVV
-    document.getElementById('cvv').addEventListener('input', function() {
-      this.value = this.value.replace(/\D/g,'').slice(0,4);
-    });
-
-    // Professional modal logic
-    const confirmationModal = document.getElementById('confirmationModal');
-    const secondaryModal = document.getElementById('secondaryModal');
-    const backBtn = document.getElementById('backToCheckoutBtn');
-    const moreInfoBtn = document.getElementById('moreInfoBtn');
-    const confirmYesBtn = document.getElementById('confirmYesBtn');
-    const confirmNoBtn = document.getElementById('confirmNoBtn');
-    const redirectURL = "https://somethingisnotrightokay.github.io/School-project-do-not-lookpls/clownfacewebsite.html";
-
-    // Return to checkout: simply closes modal
-    backBtn.addEventListener('click', function() {
-      confirmationModal.classList.remove('active');
-    });
-
-    // More info: opens secondary modal for confirmation
-    moreInfoBtn.addEventListener('click', function() {
-      confirmationModal.classList.remove('active');
-      secondaryModal.classList.add('active');
-      confirmYesBtn.focus();
-    });
-
-    confirmYesBtn.addEventListener('click', function() {
-      // Actually redirect after confirmation
-      window.location.href = redirectURL;
-    });
-
-    confirmNoBtn.addEventListener('click', function() {
-      secondaryModal.classList.remove('active');
-      confirmationModal.classList.add('active');
-      moreInfoBtn.focus();
-    });
-
-    // Dismiss modals with ESC
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        if (secondaryModal.classList.contains('active')) {
-          secondaryModal.classList.remove('active');
-          confirmationModal.classList.add('active');
-          moreInfoBtn.focus();
-        } else if (confirmationModal.classList.contains('active')) {
-          confirmationModal.classList.remove('active');
-        }
+    document.getElementById('visitClownfaceBtn').onclick = function() {
+      window.location.href = "clownfacewebsite.html";
+    };
+    // Optional: close modal on Escape
+    window.addEventListener('keydown', function(e){
+      if(e.key === "Escape"){
+        document.getElementById('confirmationModal').classList.remove('active');
       }
-    });
+    })
   </script>
 </body>
 </html>
