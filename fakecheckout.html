@@ -181,9 +181,7 @@
       flex-shrink: 0;
       filter: drop-shadow(0 0 2px #00ff8866);
     }
-
-    .prank-modal,
-    .warning-modal {
+    .modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
@@ -195,11 +193,10 @@
       flex-direction: column;
       animation: fadeIn 0.28s;
     }
-    .prank-modal.active,
-    .warning-modal.active {
+    .modal.active {
       display: flex;
     }
-    .prank-content, .warning-content {
+    .modal-content {
       background: var(--card-bg);
       border-radius: 16px;
       padding: 2.2rem 2.5rem 2rem 2.5rem;
@@ -210,7 +207,7 @@
       color: #fff;
       border: 1.6px solid #2d3651bb;
     }
-    .prank-content h2, .warning-content h2 {
+    .modal-content h2 {
       color: var(--primary);
       font-size: 1.7rem;
       margin-bottom: 0.7rem;
@@ -218,14 +215,14 @@
       letter-spacing: 0.06em;
       text-shadow: 0 2px 8px #0004;
     }
-    .prank-content p, .warning-content p {
+    .modal-content p {
       font-size: 1.17rem;
       margin-bottom: 1.4rem;
       color: #ffbfae;
       font-weight: 600;
       letter-spacing: 0.03em;
     }
-    .prank-content button, .warning-content button {
+    .modal-content button {
       background: var(--primary);
       color: #fff;
       border: none;
@@ -241,11 +238,11 @@
       letter-spacing: 0.03em;
       min-width: 90px;
     }
-    .prank-content button:hover, .warning-content button:hover {
+    .modal-content button:hover {
       background: var(--primary-dark);
     }
     @media (max-width: 560px) {
-      .checkout-container, .prank-content, .warning-content {
+      .checkout-container, .modal-content {
         padding: 1.1rem !important;
         font-size: 1rem;
       }
@@ -257,7 +254,7 @@
       }
     }
     @media (max-width: 410px) {
-      .checkout-container, .prank-content, .warning-content {
+      .checkout-container, .modal-content {
         padding: 0.5rem !important;
       }
     }
@@ -279,7 +276,7 @@
     </div>
     <form class="checkout-form" autocomplete="off">
       <label for="name">Full Name</label>
-      <input id="name" type="text" placeholder="Enter your name" required autocomplete="name">
+      <input id="name" type="text" placeholder="Enter your full name" required autocomplete="name">
       <label for="address">Address</label>
       <input id="address" type="text" placeholder="Shipping address" required autocomplete="address-line1">
       <label for="card">Card Number</label>
@@ -289,7 +286,7 @@
       <label for="cvv">CVV</label>
       <input id="cvv" type="text" inputmode="numeric" maxlength="4" placeholder="123" required autocomplete="cc-csc">
       <button type="submit" class="checkout-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:0.6em;" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10.5L8.5 15L16 7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:0.6em;" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10.5L8.5 15L16 7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Complete Secure Checkout
       </button>
       <div class="secure-badge">
@@ -298,24 +295,27 @@
       </div>
     </form>
   </main>
-  <div class="prank-modal" id="prankModal" role="dialog" aria-modal="true">
-    <div class="prank-content">
-      <h2>Pranked! 😎</h2>
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmationModal" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <h2>YourBrain.exe has stopped responding.</h2>
       <p>
-        You really thought you were buying the <strong>TitanTime Pro Max</strong> for $880?<br>
-        <span style="color: #00ff88;">No money was taken (99% Guarantee given)</span><br>
-        <strong>You’ve just been pranked!</strong>
+        Imagine thinking you can buy a watch that does not exist 🤣🤣🤣<strong>Especially such a beastly watch for 880 bucks?</strong>.<br>
+        <span style="color: #00ff88;">You have a 99% guarantee that no money was taken! Or was it?</span><br>
+        Click below to return to the checkout or to view more information.
       </p>
-      <button id="backToCheckoutBtn" type="button">Back to Checkout</button>
+      <button id="backToCheckoutBtn" type="button">Return to Checkout</button>
+      <button id="moreInfoBtn" type="button">View More Information</button>
     </div>
   </div>
-  <div class="warning-modal" id="warningModal" role="alertdialog" aria-modal="true" aria-labelledby="warningTitle">
-    <div class="warning-content">
-      <h2 id="warningTitle">Warning</h2>
-      <p>Are you sure? You will see something offensive.</p>
+  <!-- Secondary Confirmation Modal -->
+  <div class="modal" id="secondaryModal" role="alertdialog" aria-modal="true" aria-labelledby="secondaryTitle">
+    <div class="modal-content">
+      <h2 id="secondaryTitle">Confirm Navigation</h2>
+      <p>Are you sure you want to proceed? The next page may contain content intended for humour, and is a complete joke. Do not take it seriously.</p>
       <div>
-        <button id="warningYesBtn" type="button">Yes</button>
-        <button id="warningNoBtn" type="button">No</button>
+        <button id="confirmYesBtn" type="button">Proceed</button>
+        <button id="confirmNoBtn" type="button">Cancel</button>
       </div>
     </div>
   </div>
@@ -323,7 +323,7 @@
     // Modal logic
     document.querySelector('.checkout-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      document.getElementById('prankModal').classList.add('active');
+      document.getElementById('confirmationModal').classList.add('active');
       setTimeout(() => {
         document.getElementById('backToCheckoutBtn').focus();
       }, 100);
@@ -345,58 +345,47 @@
       this.value = this.value.replace(/\D/g,'').slice(0,4);
     });
 
-    // Warning modal and redirect logic
-    let backClickCount = 0;
-    let warningYesCount = 0;
-    const prankModal = document.getElementById('prankModal');
-    const warningModal = document.getElementById('warningModal');
+    // Professional modal logic
+    const confirmationModal = document.getElementById('confirmationModal');
+    const secondaryModal = document.getElementById('secondaryModal');
     const backBtn = document.getElementById('backToCheckoutBtn');
-    const warningYesBtn = document.getElementById('warningYesBtn');
-    const warningNoBtn = document.getElementById('warningNoBtn');
+    const moreInfoBtn = document.getElementById('moreInfoBtn');
+    const confirmYesBtn = document.getElementById('confirmYesBtn');
+    const confirmNoBtn = document.getElementById('confirmNoBtn');
     const redirectURL = "https://somethingisnotrightokay.github.io/School-project-do-not-lookpls/middlefingerwebsite.html";
 
+    // Return to checkout: simply closes modal
     backBtn.addEventListener('click', function() {
-      backClickCount++;
-      if (backClickCount <= 5) {
-        // Just close and reopen modal for effect
-        prankModal.classList.remove('active');
-        setTimeout(() => prankModal.classList.add('active'), 200);
-      } else {
-        // Show warning modal from 6th click
-        prankModal.classList.remove('active');
-        warningModal.classList.add('active');
-        warningYesBtn.focus();
-      }
+      confirmationModal.classList.remove('active');
     });
 
-    warningYesBtn.addEventListener('click', function() {
-      warningYesCount++;
-      if (warningYesCount >= 2) {
-        // Actually redirect
-        window.location.href = redirectURL;
-      } else {
-        // Ask again
-        warningModal.classList.remove('active');
-        setTimeout(() => warningModal.classList.add('active'), 200);
-        warningYesBtn.focus();
-      }
+    // More info: opens secondary modal for confirmation
+    moreInfoBtn.addEventListener('click', function() {
+      confirmationModal.classList.remove('active');
+      secondaryModal.classList.add('active');
+      confirmYesBtn.focus();
     });
 
-    warningNoBtn.addEventListener('click', function() {
-      warningModal.classList.remove('active');
-      prankModal.classList.add('active');
-      backBtn.focus();
+    confirmYesBtn.addEventListener('click', function() {
+      // Actually redirect after confirmation
+      window.location.href = redirectURL;
+    });
+
+    confirmNoBtn.addEventListener('click', function() {
+      secondaryModal.classList.remove('active');
+      confirmationModal.classList.add('active');
+      moreInfoBtn.focus();
     });
 
     // Dismiss modals with ESC
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        if (warningModal.classList.contains('active')) {
-          warningModal.classList.remove('active');
-          prankModal.classList.add('active');
-          backBtn.focus();
-        } else if (prankModal.classList.contains('active')) {
-          prankModal.classList.remove('active');
+        if (secondaryModal.classList.contains('active')) {
+          secondaryModal.classList.remove('active');
+          confirmationModal.classList.add('active');
+          moreInfoBtn.focus();
+        } else if (confirmationModal.classList.contains('active')) {
+          confirmationModal.classList.remove('active');
         }
       }
     });
